@@ -8,13 +8,15 @@ interface SurveyStartPageProps {
   description?: string;
   startButtonText?: string;
   onStart: () => void;
+  logoUrl?: string;
 }
 
 export const SurveyStartPage: React.FC<SurveyStartPageProps> = ({
   title = 'Welcome to the Survey',
   description = 'Please click the button below to begin.',
   startButtonText = 'Start Survey',
-  onStart
+  onStart,
+  logoUrl
 }) => {
   const theme = useTheme();
 
@@ -43,19 +45,21 @@ export const SurveyStartPage: React.FC<SurveyStartPageProps> = ({
             overflow: 'hidden',
           }}
         >
-          <Box
-            component="img"
-            src="/assets/logo.png"
-            alt="MindModel Logo"
-            sx={{
-              position: 'absolute',
-              top: 16,
-              right: 16,
-              width: 40,
-              height: 40,
-              opacity: 0.9,
-            }}
-          />
+          {logoUrl && (
+            <Box
+              component="img"
+              src={logoUrl}
+              alt="Survey Logo"
+              sx={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                width: 40,
+                height: 40,
+                opacity: 0.9,
+              }}
+            />
+          )}
           <Typography 
             component="h1" 
             variant="h3"

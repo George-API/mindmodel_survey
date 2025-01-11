@@ -9,13 +9,15 @@ interface SurveyEndPageProps {
   description?: string;
   returnButtonText?: string;
   onReturn?: () => void;
+  logoUrl?: string;
 }
 
 export const SurveyEndPage: React.FC<SurveyEndPageProps> = ({
   title = 'Thank You!',
   description = 'Your survey responses have been submitted successfully.',
   returnButtonText = 'Return',
-  onReturn
+  onReturn,
+  logoUrl
 }) => {
   const theme = useTheme();
 
@@ -48,8 +50,25 @@ export const SurveyEndPage: React.FC<SurveyEndPageProps> = ({
               flexDirection: 'column',
               alignItems: 'center',
               gap: 3,
+              position: 'relative',
+              width: '100%',
             }}
           >
+            {logoUrl && (
+              <Box
+                component="img"
+                src={logoUrl}
+                alt="Survey Logo"
+                sx={{
+                  position: 'absolute',
+                  top: -16,
+                  right: -16,
+                  width: 40,
+                  height: 40,
+                  opacity: 0.9,
+                }}
+              />
+            )}
             <CheckCircleOutlineIcon
               sx={{
                 fontSize: 64,
