@@ -172,12 +172,14 @@ export const createSurvey = (options: CreateSurveyOptions): CreateSurveyResult =
     if (screen === 'end' && options.endScreen) {
       return (
         <ThemeProvider theme={options.theme || theme}>
-          <SurveyEndPage 
-            title={options.endScreen.title}
-            description={options.endScreen.description}
-            returnButtonText={options.endScreen.returnButtonText}
-            onReturn={options.onReturn}
-          />
+          <Container maxWidth="sm">
+            <SurveyEndPage 
+              title={options.endScreen.title}
+              description={options.endScreen.description}
+              returnButtonText={options.endScreen.returnButtonText}
+              onReturn={options.onReturn}
+            />
+          </Container>
         </ThemeProvider>
       );
     }

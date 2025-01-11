@@ -99,7 +99,8 @@ const { Survey } = createSurvey({
     console.log('Survey submitted:', answers);
     await new Promise(resolve => setTimeout(resolve, 2000));
   },
-  onChange: (questionId, value) => console.log('Question changed:', questionId, value),
+  onReturn: () => console.log('Return to dashboard clicked'),
+  onChange: (questionId, value) => console.log(`Question ${questionId} changed:`, value),
   onComplete: () => console.log('Survey completed')
 });
 
