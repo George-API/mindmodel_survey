@@ -1,0 +1,46 @@
+I'll describe each file's role and how they integrate together:
+createSurvey.ts:
+Purpose: Factory function to create a new survey instance
+Key Features:
+Creates the survey definition structure
+Generates a React component wrapper
+Handles initial metadata setup
+Integration Points:
+Uses useSurveyRunner for submission handling
+Returns a reusable Survey component
+Connects with the Survey component from Survey.tsx
+2. useSurvey.ts:
+Purpose: Core form state management hook
+Key Features:
+Manages form values and errors
+Handles validation
+Tracks overall form validity
+Integration Points:
+Used by the Survey component
+Provides form state management
+Handles per-question validation
+3. useSurveyRunner.ts:
+Purpose: Survey progress and submission management hook
+Key Features:
+Wraps the SurveyRunner class functionality
+Provides React-friendly interface
+Handles cleanup on unmount
+Integration Points:
+Used by components created by createSurvey
+Connects to SurveyRunner class
+Manages survey lifecycle
+The flow between these components:
+createSurvey creates a new survey definition and component
+The created component uses useSurveyRunner for progress/submission
+The Survey component uses useSurvey for form state
+useSurveyRunner connects to SurveyRunner for persistence/progress
+Key Differences:
+useSurvey: Focuses on form state and validation
+useSurveyRunner: Handles survey progress and submission
+createSurvey: Factory for creating survey instances
+SurveyRunner: Core class for survey lifecycle management
+This separation of concerns allows:
+Independent form state management
+Separate progress tracking
+Clean component creation
+Reusable survey instances
