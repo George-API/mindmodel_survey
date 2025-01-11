@@ -7,15 +7,17 @@ interface TextQuestionProps extends TextQuestionType {
   value: string;
   onChange: (value: string) => void;
   error?: string;
+  previewMode?: boolean;
 }
 
 export const TextQuestion: React.FC<TextQuestionProps> = ({
-  value,
+  value = '',
   onChange,
   placeholder,
-  multiline,
-  maxLength,
+  multiline = false,
+  rows = 3,
   error,
+  previewMode = false,
   ...baseProps
 }) => {
   const theme = useTheme();
@@ -23,49 +25,53 @@ export const TextQuestion: React.FC<TextQuestionProps> = ({
   return (
     <BaseQuestion {...baseProps} error={error}>
       <TextField
+        fullWidth
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => !previewMode && onChange(e.target.value)}
         placeholder={placeholder}
         multiline={multiline}
-        minRows={multiline ? 3 : 1}
+        minRows={multiline ? rows : 1}
+        disabled={previewMode}
+        variant="outlined"
         inputProps={{ 
-          maxLength,
           style: {
-            padding: theme.spacing(1.5),
-            borderRadius: theme.shape.borderRadius,
+            padding: theme.spacing(1.75),
+            fontSize: '1rem',
+            lineHeight: 1.6,
           }
         }}
         error={!!error}
         sx={{
           '& .MuiOutlinedInput-root': {
             backgroundColor: 'background.paper',
-            transition: theme.transitions.create(['box-shadow', 'border-color'], {
-              duration: theme.transitions.duration.short,
-            }),
+            transition: theme.transitions.create(
+              ['border-color', 'box-shadow', 'background-color'],
+              { duration: theme.transitions.duration.shorter }
+            ),
             '&:hover': {
-              borderColor: 'primary.main',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+              backgroundColor: theme.palette.action.hover,
+              borderColor: 'primary.light',
             },
             '&.Mui-focused': {
-              boxShadow: '0 2px 8px rgba(33, 150, 243, 0.15)',
+              backgroundColor: 'background.paper',
+              boxShadow: `0 0 0 2px ${theme.palette.primary.main}14`,
+            },
+            '&.Mui-error': {
+              boxShadow: `0 0 0 2px ${theme.palette.error.main}14`,
+            },
+            '&.Mui-disabled': {
+              backgroundColor: theme.palette.action.disabledBackground,
+              borderColor: theme.palette.action.disabled,
+            },
+          },
+          '& .MuiOutlinedInput-input': {
+            '&::placeholder': {
+              color: theme.palette.text.secondary,
+              opacity: 0.7,
             },
           },
         }}
       />
-      {maxLength && (
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{
-            mt: 0.5,
-            display: 'block',
-            textAlign: 'right',
-            fontSize: '0.75rem',
-          }}
-        >
-          {value?.length || 0}/{maxLength}
-        </Typography>
-      )}
     </BaseQuestion>
   );
 };

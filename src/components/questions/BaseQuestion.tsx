@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { BaseQuestion as BaseQuestionType } from '../../types/survey.types';
 
 interface BaseQuestionProps extends BaseQuestionType {
@@ -9,7 +10,7 @@ interface BaseQuestionProps extends BaseQuestionType {
 }
 
 export const BaseQuestion: React.FC<BaseQuestionProps> = ({
-  title,
+  label,
   description,
   required,
   children,
@@ -32,30 +33,34 @@ export const BaseQuestion: React.FC<BaseQuestionProps> = ({
       <Box
         sx={{
           width: '100%',
-          mb: 3,
+          mb: description ? 3 : 2,
         }}
       >
         <Typography
-          variant="h5"
+          variant="h6"
           component="h2"
-          gutterBottom
+          gutterBottom={false}
           sx={{
             fontWeight: 500,
-            color: 'text.primary',
-            fontSize: '1.5rem',
+            color: error ? 'error.main' : 'text.primary',
+            fontSize: '1.25rem',
+            lineHeight: 1.4,
+            letterSpacing: '-0.01em',
             display: 'flex',
             alignItems: 'center',
             gap: 0.5,
+            transition: theme.transitions.create('color'),
           }}
         >
-          {title}
+          {label}
           {required && (
             <Typography
               component="span"
               sx={{
-                color: 'error.main',
+                color: error ? 'error.main' : 'error.light',
                 ml: 0.5,
-                fontSize: '1.25rem',
+                fontSize: '1.1rem',
+                transition: theme.transitions.create('color'),
               }}
             >
               *
@@ -65,11 +70,13 @@ export const BaseQuestion: React.FC<BaseQuestionProps> = ({
         {description && (
           <Typography
             variant="body1"
-            color="text.secondary"
+            color={error ? 'error.main' : 'text.secondary'}
             sx={{
               mt: 1,
-              fontSize: '1rem',
+              fontSize: '0.95rem',
               lineHeight: 1.6,
+              opacity: 0.9,
+              transition: theme.transitions.create(['color', 'opacity']),
             }}
           >
             {description}
@@ -90,12 +97,15 @@ export const BaseQuestion: React.FC<BaseQuestionProps> = ({
             variant="body2"
             color="error"
             sx={{
-              mt: 1,
+              mt: 1.5,
               display: 'flex',
               alignItems: 'center',
               gap: 0.5,
+              fontSize: '0.875rem',
+              fontWeight: 500,
             }}
           >
+            <ErrorOutlineIcon sx={{ fontSize: '1.1rem' }} />
             {error}
           </Typography>
         )}
