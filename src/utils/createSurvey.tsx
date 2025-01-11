@@ -7,8 +7,6 @@ import { SurveyStartPage } from '../pages/SurveyStartPage';
 import { SurveyEndPage } from '../pages/SurveyEndPage';
 import theme from '../theme/theme';
 import { validateField } from '../utils/validation';
-import { useSurvey } from '../hooks/useSurvey';
-import { useSurveyRunner } from '../hooks/useSurveyRunner';
 import { SurveyRunner } from '../utils/surveyRunner';
 import type { 
   SurveyConfig, 
