@@ -1,22 +1,29 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dts from 'vite-plugin-dts'
+import path from 'path'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    dts()
+  ],
   build: {
     lib: {
-      entry: 'src/index.ts',
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'MindModelSurvey',
+      formats: ['es', 'umd'],
       fileName: (format) => `mindmodel-survey.${format}.js`
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@mui/material', '@mui/icons-material'],
+      external: ['react', 'react-dom', '@mui/material', '@emotion/react', '@emotion/styled'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
           '@mui/material': 'MaterialUI',
-          '@mui/icons-material': 'MaterialIcons'
+          '@emotion/react': 'EmotionReact',
+          '@emotion/styled': 'EmotionStyled'
         }
       }
     }

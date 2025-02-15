@@ -1,6 +1,6 @@
 // Main Components
 export { Survey } from './components/survey/Survey';
-export { createSurvey } from './utils/createSurvey';
+export { createSurvey } from './createSurvey';
 
 // Types
 export type {
