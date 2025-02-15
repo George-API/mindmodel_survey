@@ -17,7 +17,14 @@ export const HomePage: React.FC = () => {
       </Box>
 
       <Box sx={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
-        <Card sx={{ minWidth: 275, flex: 1 }}>
+        <Card sx={{ 
+          minWidth: 275, 
+          flex: 1,
+          transition: 'box-shadow 0.2s ease-in-out',
+          '&:hover': {
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          }
+        }}>
           <CardContent>
             <Typography variant="h5" component="h2" gutterBottom>
               Component Preview
@@ -35,7 +42,14 @@ export const HomePage: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card sx={{ minWidth: 275, flex: 1 }}>
+        <Card sx={{ 
+          minWidth: 275, 
+          flex: 1,
+          transition: 'box-shadow 0.2s ease-in-out',
+          '&:hover': {
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          }
+        }}>
           <CardContent>
             <Typography variant="h5" component="h2" gutterBottom>
               Baseline Test Survey
